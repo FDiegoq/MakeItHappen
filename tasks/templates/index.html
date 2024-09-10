@@ -1,0 +1,29 @@
+{%extends 'base.html' %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold">Minhas Tarefas</h2>
+        <a href="{% url 'criar_tarefa' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+            Adicionar Tarefa
+        </a>
+    </div>
+
+    <div class="bg-white shadow-md rounded p-4">
+        <ul class="divide-y divide-gray-200">
+            {% for tarefa in tarefas %}
+                <li class="py-4 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-medium">{{ tarefa.titulo }}</h3>
+                        <p class="text-gray-600">{{ tarefa.descricao }}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="{% url 'editar_tarefa' tarefa.id %}" class="text-white hover:text-gray-400 bg-green-400 p-4 rounded-md transition-colors">Editar</a>
+                        <a href="{% url 'deletar_tarefa' tarefa.id %}" class="text-white hover:text-gray-400 bg-red-400 p-4 rounded-md transition-colors">Excluir</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="py-4 text-center text-gray-500">Nenhuma tarefa encontrada.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

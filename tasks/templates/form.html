@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block content %}
+    <div class="bg-white shadow-md rounded p-6 max-w-lg mx-auto">
+        <h2 class="text-xl font-semibold mb-4">{{ form_title }}</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Campo Título -->
+            <div class="mb-4">
+                <label for="{{ form.titulo.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    Título
+                </label>
+                {{ form.titulo }}
+                {% if form.titulo.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.titulo.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Campo Descrição -->
+            <div class="mb-4">
+                <label for="{{ form.descricao.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    Descrição
+                </label>
+                {{ form.descricao }}
+                {% if form.descricao.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.descricao.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Campo Status -->
+            <div class="mb-4">
+                <label for="{{ form.status.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    Status
+                </label>
+                {{ form.status }}
+                {% if form.status.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.status.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Campo Setor (ForeignKey) -->
+            <div class="mb-4">
+                <label for="{{ form.setor.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    Setor
+                </label>
+                {{ form.setor}}
+                {% if form.setor.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.setor.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Campo Usuários (ManyToManyField) -->
+            <div class="mb-4">
+                <label for="{{ form.usuarios.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    Usuários
+                </label>
+                {{ form.usuarios }}
+                {% if form.usuarios.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.usuarios.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Campo Imagem (ImageField) -->
+            <div class="mb-4">
+                <label for="{{ form.imagem.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    Imagem
+                </label>
+                {{ form.imagem }}
+                {% if form.imagem.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ form.imagem.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Botão de Enviar -->
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
